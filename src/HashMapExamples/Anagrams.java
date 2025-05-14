@@ -11,49 +11,51 @@ public class Anagrams {
         String str1 = "Silent";
         String str2 = "Listen";
 
-        boolean result = isAnagram(str1, str2);
-        System.out.println(" Is Anagram? " + result);
-
-    }
-        public static  boolean isAnagram(String str1, String str2){
-
-        //convet and remove space
         str1 = str1.replace("\\s+" , "").toLowerCase();
-        str2 = str2.replace("\\+s","").toLowerCase();
+        str2= str2.replace("\\s+" , "").toLowerCase();
 
-        //check the edge case
-            if ((str1.length() != str2.length())) return  false;
+        boolean result = areAnagrams(str1,str2);
+        System.out.println("Are anagrams " + result);
+    }
 
-        //create hashmap
+    public static boolean areAnagrams(String str1, String str2){
 
-            HashMap<Character, Integer> map = new HashMap<>();
+        //check edge case
 
-            //iterate over str1 and store char in map
-            for (char ch : str1.toCharArray()){
-                map.put(ch, map.getOrDefault(ch,0)+1);
-            }
+        if (str2.length() != str1.length()) return false;
 
-            //since we have hashmap with all char of str1 in it,
-            //iterate over str2 and check if all chars are same as str1
-            //if not return false
+        //create a hashmap,
 
-            for (char ch : str2.toCharArray()) {
-                if (!map.containsKey(ch)) return false;
+        HashMap<Character, Integer> map = new HashMap<>();
 
+        //iterate over str1, and store the keyvalue
 
-                //if yes, start reducing/cancelling each character from
-                map.put(ch, map.get(ch) - 1);
+        for (char ch : str1.toCharArray()) {
 
-                //upon cancelling all char, if char in map == 0, means its anagram
-                //thus remove all the char from map make it empty
+            //if char exists, increment the count and if not store it map with count 1
 
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+            //we will work on str2
+            //iterate over str2 and if the characters which are already stored in map
+            //is not same as character in str2 , return false
+
+            for (char ch : str2.toCharArray()){
+                if (!map.containsKey(ch)) return  false;
+
+                //Decreases the frequency of the current character.
+                //If s had frequency 1, now it becomes 0.
+                map.put(ch, map.get(ch) -1);
+
+                //If the frequency becomes zero after subtracting, we remove that character from the map.
+                //This helps keep the map clean.
                 if (map.get(ch) == 0) map.remove(ch);
-
             }
 
-            //After the loop, if all characters matched and balanced, the map should be empty.
-            //If it's empty → all characters canceled out → ✅ they are anagrams.
-            return map.isEmpty();
+        //After the loop, if all characters matched and balanced, the map should be empty.
+        //If it's empty → all characters canceled out → ✅ they are anagrams.
+        //If not empty → ❌ not anagrams
 
+        return map.isEmpty();
     }
 }

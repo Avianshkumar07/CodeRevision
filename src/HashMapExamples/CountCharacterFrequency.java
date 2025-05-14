@@ -3,7 +3,7 @@ package HashMapExamples;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CountWordCharacter {
+public class CountCharacterFrequency {
 
     public static void main(String[] args) {
 
@@ -34,9 +34,12 @@ public class CountWordCharacter {
 
         //iterate over map and print the entryset (key value)
 
-        for (Map.Entry<Character,Integer> entry : charCount.entrySet()){
+//        for (Map.Entry<Character,Integer> entry : charCount.entrySet()){
+//
+//            System.out.println(entry.getKey() + " -> " + entry.getValue());
+//        }
+        //or u cna use simple print
 
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }
+        System.out.println(charCount);
     }
 }

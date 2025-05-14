@@ -9,20 +9,22 @@ public class CountWordFrequency {
 
 
         //take the input
-        String sentence = " apple banana apple orange banana apple ";
+        String sentence = " apple Banana Apple Orange Banana Apple ";
 
+        //make empty string array to store result
+        sentence = sentence.toLowerCase();
+        String[] result = sentence.split("\\s+");
 
-        //split the sentence into words and store in String array
+        //create a hashmap
 
-        String[] words = sentence.split(" ");
+        HashMap<String,Integer> map = new HashMap<>();
 
-        //create new hashmap
+        //iterate over sentence,covert word in char and
+        // if char  exists increment the count
+        //if char doesnt exists add the ch, with count 1
 
-        HashMap<String,Integer> wordCount = new HashMap<>();
-
-        //make a for loop, iterate thru each word
-
-        for( String word : words){
+        //alternate way
+        /*for( String word : words){
 
             //if word already exists update the hashmap
 
@@ -32,17 +34,22 @@ public class CountWordFrequency {
             //else add new word in hashmap
 
             else {
-                wordCount.put(word,1); //key : word , value : 1
-            }
+                wordCount.put(word,1); //key : word ,
+
+         */
+
+
+        for (String word : result){
+           map.put(word, map.getOrDefault(word,0) +1);
         }
 
-        //print the words with value
-        //iterate thru  each hashmap entry(key-value)
+        //iterate over map and print
 
-        for (Map.Entry<String,Integer> entry : wordCount.entrySet()){
-
+        for (Map.Entry<String, Integer> entry : map.entrySet()){
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
+
+
 
     }
 }
